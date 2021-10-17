@@ -6,7 +6,7 @@ const submitHandler = (values, actions) => {
     console.log({ values, actions });
 };
 
-const formValue = {
+const intialValues = {
     name: '',
     image: '',
     symptoms: [{ items: [{ text: '' }] }],
@@ -53,10 +53,15 @@ const formValue = {
     ],
 };
 
-const DiseaseForm = () => {
+const DiseaseForm = ({ disease }) => {
+    const formValue = disease || intialValues;
     return (
         <div className="mt-3">
-            <Formik initialValues={formValue} onSubmit={submitHandler}>
+            <Formik
+                initialValues={formValue}
+                onSubmit={submitHandler}
+                enableReinitialize
+            >
                 <Form>
                     <div className="mb-3 p-3 bg-light">
                         <label className="form-label">Name</label>
