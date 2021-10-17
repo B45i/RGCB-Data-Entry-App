@@ -1,11 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import FormItem from './FormItem';
 
-const submitHandler = (values, actions) => {
-    console.log('submitted');
-    console.log({ values, actions });
-};
-
 const intialValues = {
     name: '',
     image: '',
@@ -53,8 +48,11 @@ const intialValues = {
     ],
 };
 
-const DiseaseForm = ({ disease }) => {
+const DiseaseForm = ({ disease, onSave }) => {
     const formValue = disease || intialValues;
+
+    const submitHandler = (values, actions) => onSave(values);
+
     return (
         <div className="mt-3">
             <Formik
@@ -102,7 +100,7 @@ const DiseaseForm = ({ disease }) => {
                     <FormItem label={'Extra'} controlName={'extra'} />
 
                     <button type="submit" className="btn btn-primary my-3">
-                        Save Data
+                        Save Disease
                     </button>
                 </Form>
             </Formik>

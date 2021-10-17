@@ -105,9 +105,12 @@ const FormItem = ({
                                                         )}
                                                     </div>
                                                     <button
-                                                        onClick={e =>
-                                                            removeItemHandler(j)
-                                                        }
+                                                        onClick={e => {
+                                                            e.preventDefault();
+                                                            removeItemHandler(
+                                                                j
+                                                            );
+                                                        }}
                                                         className="btn btn-danger align-self-start"
                                                     >
                                                         Remove
@@ -136,10 +139,14 @@ const FormItem = ({
                     ));
                 }}
             />
-
-            <button onClick={addGroupHandler} className="btn btn-success w-100">
-                Add
-            </button>
+            {hasTitle && (
+                <button
+                    onClick={addGroupHandler}
+                    className="btn btn-success w-100"
+                >
+                    Add
+                </button>
+            )}
         </div>
     );
 };
