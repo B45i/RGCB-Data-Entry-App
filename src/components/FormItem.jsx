@@ -1,6 +1,11 @@
 import { Field, FieldArray } from 'formik';
 
-const FormItem = ({ label }) => {
+const FormItem = ({
+    label,
+    controlName,
+    hasImage = false,
+    hasTitle = true,
+}) => {
     let pushGroup;
     let removeGroup;
     let pushItem;
@@ -24,8 +29,8 @@ const FormItem = ({ label }) => {
                 title: '',
                 items: [
                     {
-                        image: '',
                         text: '',
+                        ...(hasImage && { image: '' }),
                     },
                 ],
             });
@@ -36,8 +41,8 @@ const FormItem = ({ label }) => {
         e.preventDefault();
         if (pushItem) {
             pushItem({
-                image: '',
                 text: '',
+                ...(hasImage && { image: '' }),
             });
         }
     };
@@ -55,7 +60,7 @@ const FormItem = ({ label }) => {
             <label className="form-label">{label}</label>
 
             <FieldArray
-                name="ingredients"
+                name={controlName}
                 render={arrayHelpers => {
                     bindGroupMethods(arrayHelpers);
                     const { form, name } = arrayHelpers;
@@ -66,11 +71,13 @@ const FormItem = ({ label }) => {
                             key={i}
                         >
                             <div className="flex-grow-1">
-                                <Field
-                                    className="form-control"
-                                    name={`${name}.${i}.title`}
-                                    placeholder={`${label} Title`}
-                                />
+                                {hasTitle && (
+                                    <Field
+                                        className="form-control"
+                                        name={`${name}.${i}.title`}
+                                        placeholder={`${label} Title`}
+                                    />
+                                )}
 
                                 <FieldArray
                                     name={`${name}.${i}.items`}
@@ -85,14 +92,17 @@ const FormItem = ({ label }) => {
                                                     <div className="flex-grow-1">
                                                         <Field
                                                             className="form-control mb-2"
-                                                            name={`${name}.${i}.items.${j}.image`}
-                                                            placeholder={`${label} item image`}
-                                                        />
-                                                        <Field
-                                                            className="form-control"
                                                             name={`${name}.${i}.items.${j}.text`}
                                                             placeholder={`${label} item text`}
                                                         />
+
+                                                        {hasImage && (
+                                                            <Field
+                                                                className="form-control"
+                                                                name={`${name}.${i}.items.${j}.image`}
+                                                                placeholder={`${label} item image`}
+                                                            />
+                                                        )}
                                                     </div>
                                                     <button
                                                         onClick={e =>
@@ -114,12 +124,14 @@ const FormItem = ({ label }) => {
                                     Add item
                                 </button>
                             </div>
-                            <button
-                                onClick={e => removeGroupHandler(i)}
-                                className="btn btn-danger align-self-start"
-                            >
-                                Remove
-                            </button>
+                            {hasTitle && (
+                                <button
+                                    onClick={e => removeGroupHandler(i)}
+                                    className="btn btn-danger align-self-start"
+                                >
+                                    Remove
+                                </button>
+                            )}
                         </div>
                     ));
                 }}

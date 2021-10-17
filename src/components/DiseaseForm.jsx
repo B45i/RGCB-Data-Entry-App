@@ -9,14 +9,44 @@ const submitHandler = (values, actions) => {
 const formValue = {
     name: '',
     image: '',
-    symptoms: [''],
+    symptoms: [{ items: [{ text: '' }] }],
     ingredients: [
         {
-            title: 'Ingredients for external application',
+            title: '',
             items: [
                 {
-                    image: 'aloevera.jpg',
-                    text: 'Aloe vera whole leaf cut from the base– 250 grams (do not remove the outer skin)',
+                    image: '',
+                    text: '',
+                },
+            ],
+        },
+    ],
+    preparation: [
+        {
+            title: '',
+            items: [
+                {
+                    text: '',
+                },
+            ],
+        },
+    ],
+    application: [
+        {
+            title: '',
+            items: [
+                {
+                    text: '',
+                },
+            ],
+        },
+    ],
+    extra: [
+        {
+            title: '',
+            items: [
+                {
+                    text: '',
                 },
             ],
         },
@@ -46,29 +76,28 @@ const DiseaseForm = () => {
                         />
                     </div>
 
-                    {/* <div className="mb-3 p-3 bg-light">
-                        <label className="form-label">Symptoms</label>
-                        <FieldArray
-                            name="symptoms"
-                            render={arrayHelpers => {
-                                const { form, name } = arrayHelpers;
-                                const values = form.values[name] || [];
-                                return values.map((formItem, i) => (
-                                    <div className="mb-2" key={i}>
-                                        <Field
-                                            className="form-control"
-                                            name={`${name}.${i}`}
-                                        />
-                                    </div>
-                                ));
-                            }}
-                        />
-                    </div> */}
+                    <FormItem
+                        label={'Symptoms'}
+                        controlName={'symptoms'}
+                        hasTitle={false}
+                    />
+                    <FormItem
+                        label={'Ingredients'}
+                        controlName={'ingredients'}
+                        hasImage
+                    />
+                    <FormItem
+                        label={'Preparation'}
+                        controlName={'preparation'}
+                    />
+                    <FormItem
+                        label={'Application'}
+                        controlName={'application'}
+                    />
+                    <FormItem label={'Extra'} controlName={'extra'} />
 
-                    <FormItem label={'Ingredients'} />
-
-                    <button type="submit" className="btn btn-success mt-3">
-                        Save
+                    <button type="submit" className="btn btn-primary my-3">
+                        Save Data
                     </button>
                 </Form>
             </Formik>
