@@ -111,7 +111,7 @@ const FormItem = ({
                                                                 j
                                                             );
                                                         }}
-                                                        className="btn btn-danger align-self-start"
+                                                        className="btn btn-outline-danger align-self-start"
                                                     >
                                                         Remove
                                                     </button>
@@ -122,7 +122,7 @@ const FormItem = ({
                                 />
                                 <button
                                     onClick={addItemHandler}
-                                    className="btn btn-success w-100 mt-2"
+                                    className="btn btn-outline-success w-100 mt-2"
                                 >
                                     Add item
                                 </button>

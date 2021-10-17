@@ -77,16 +77,13 @@ function App() {
                 <div className="col-3 p-3">
                     <ul className="list-group">
                         {(data || []).map((entry, i) => (
-                            <li
-                                className={`list-group-item ${
-                                    entry === currentDisease
-                                        ? 'border-primary'
-                                        : ''
-                                }`}
-                                key={i}
-                            >
+                            <li className={`list-group-item`} key={i}>
                                 <button
-                                    className="btn w-100"
+                                    className={`btn w-100 ${
+                                        entry === currentDisease
+                                            ? 'btn-primary'
+                                            : 'btn-outline-primary'
+                                    }`}
                                     onClick={e => handleDisease(entry)}
                                 >
                                     {entry.name}
@@ -96,7 +93,7 @@ function App() {
 
                         <li className="list-group-item">
                             <button
-                                className="btn btn-primary w-100"
+                                className="btn btn-outline-primary w-100"
                                 onClick={addNewDisease}
                             >
                                 Add New
